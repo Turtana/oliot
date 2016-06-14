@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="leffaselain.FXMLDocumentController">
+    <children>
+        <Button layoutX="135.0" layoutY="189.0" onAction="#paivanLeffat" text="Listaa elokuvat" />
+      <Label layoutX="27.0" layoutY="20.0" text="Finnkinon elokuvat">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="63.0" text="Valitse teatteri:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboList" layoutX="27.0" layoutY="89.0" prefHeight="25.0" prefWidth="225.0" promptText="Valitse" />
+      <TextField fx:id="paivaInput" layoutX="265.0" layoutY="89.0" prefHeight="25.0" prefWidth="225.0" promptText="Esityspäivä (pp.kk.vvvv)" />
+      <TextField fx:id="alkuInput" layoutX="27.0" layoutY="147.0" prefHeight="25.0" prefWidth="225.0" promptText="Alkamisaika (tt)" />
+      <TextField fx:id="loppuInput" layoutX="265.0" layoutY="147.0" prefHeight="25.0" prefWidth="225.0" promptText="Päättymisaika (tt)" />
+      <Label layoutX="27.0" layoutY="122.0" text="Alkamisväli:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="235.0" text="Tai hae elokuvan nimellä:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="hakuPalkki" layoutX="227.0" layoutY="231.0" promptText="Anna elokuvan nimi" />
+      <Button layoutX="409.0" layoutY="231.0" mnemonicParsing="false" onAction="#leffahaku" text="Nimihaku" />
+      <ListView fx:id="filmList" layoutX="27.0" layoutY="272.0" prefHeight="200.0" prefWidth="463.0" />
+    </children>
+</AnchorPane>
