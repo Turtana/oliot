@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="478.0" prefWidth="320" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pullotuuba.FXMLDocumentController">
+    <children>
+        <Button layoutX="28.0" layoutY="30.0" onAction="#rahanLisays" text="Lisää rahaa (€)" />
+      <ComboBox fx:id="comboDrink" layoutX="27.0" layoutY="67.0" prefHeight="25.0" prefWidth="140.0" promptText="Valitse juoma" />
+      <Label fx:id="textOutput" layoutX="28.0" layoutY="219.0" prefHeight="25.0" prefWidth="263.0" />
+      <Label fx:id="rahaOutput" layoutX="175.0" layoutY="67.0" prefHeight="25.0" prefWidth="116.0" />
+      <Button layoutX="27.0" layoutY="143.0" mnemonicParsing="false" onAction="#osta" prefHeight="25.0" prefWidth="62.0" text="Osta" />
+      <Button layoutX="27.0" layoutY="181.0" mnemonicParsing="false" onAction="#rahaPalautus" text="Palauta rahat" />
+      <Slider fx:id="euroSlider" layoutX="153.0" layoutY="30.0" majorTickUnit="5.0" max="10.0" minorTickCount="4" prefHeight="25.0" prefWidth="140.0" showTickLabels="true" showTickMarks="true" />
+      <ComboBox fx:id="comboSize" layoutX="28.0" layoutY="106.0" prefWidth="150.0" promptText="Valitse koko" />
+      <Label fx:id="listSpace" layoutX="28.0" layoutY="255.0" prefHeight="213.0" prefWidth="263.0" />
+    </children>
+</AnchorPane>
