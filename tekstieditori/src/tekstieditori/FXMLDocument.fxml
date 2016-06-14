@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="252.0" prefWidth="243.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tekstieditori.FXMLDocumentController">
+    <children>
+        <Button layoutX="24.0" layoutY="210.0" onAction="#tallenna" prefHeight="25.0" prefWidth="87.0" text="Tallenna" />
+      <Button layoutX="129.0" layoutY="210.0" mnemonicParsing="false" onAction="#lataa" prefHeight="25.0" prefWidth="87.0" text="Lataa" />
+      <TextField fx:id="fileField" layoutX="24.0" layoutY="168.0" prefHeight="32.0" prefWidth="192.0" promptText="Tiedoston nimi tähän!" />
+      <TextArea fx:id="textInField" layoutX="24.0" layoutY="14.0" prefHeight="142.0" prefWidth="192.0" />
+    </children>
+</AnchorPane>
