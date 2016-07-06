@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLDocumentController">
+   <children>
+      <WebView fx:id="kartta" layoutX="200.0" prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: blue;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ComboBox fx:id="comboPost" layoutX="13.0" layoutY="21.0" prefHeight="34.0" prefWidth="167.0" promptText="Valitse SmartPost" />
+         </children>
+      </Pane>
+      <Label fx:id="karttanappula" alignment="CENTER" layoutX="200.0" layoutY="23.0" onMouseClicked="#tiekartta" onMouseEntered="#labelPop" onMouseExited="#labelExit" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: blue;" text="&gt;" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
