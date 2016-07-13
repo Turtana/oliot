@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="136.0" prefWidth="299.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLVirheController">
+   <children>
+      <Button fx:id="sulkuNappi" layoutX="214.0" layoutY="89.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: orange;" text="OK" />
+      <Label fx:id="varoText" alignment="TOP_LEFT" layoutX="14.0" layoutY="15.0" prefHeight="89.0" prefWidth="181.0" style="-fx-text-fill: orange;" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Polygon fill="#ffa000" layoutX="249.0" layoutY="56.0" scaleX="0.7" scaleY="0.6" stroke="TRANSPARENT" strokeType="INSIDE">
+        <points>
+          <Double fx:value="-50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="0.0" />
+          <Double fx:value="-60.0" />
+        </points>
+      </Polygon>
+      <Label layoutX="237.0" layoutY="23.0" text="!" textFill="RED">
+         <font>
+            <Font name="System Bold" size="49.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

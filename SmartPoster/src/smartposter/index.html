@@ -10,6 +10,10 @@
 </script>
 <script type="text/javascript">
   var polyMarkerArray = [];
+  var blueMarker = null; // Omaa lisäystä
+  var redMarker = null;
+  var allMarker = [];
+  
   function initialize() {
     var latlng = new google.maps.LatLng(63.9667, 25.7667);
     var myOptions = {
@@ -49,6 +53,12 @@
           position: results[0].geometry.location,
           icon: icon
         });
+        if (color === 'blue') { // Oma lisäys
+            blueMarker = marker;
+        } else if (color === 'red') {
+            redMarker = marker;
+        } // loppuu
+        allMarker.push(marker);
         var info = new google.maps.InfoWindow({
           content: infoString
         });
@@ -62,7 +72,24 @@
       }
     });
   }
-
+  
+  document.deleteMarkers = function deleteMarkers(color) { // Oma lisäys
+      if (color === 'blue') {
+         if (blueMarker !== null) {
+             blueMarker.setMap(null);
+         }
+      } else if (color === 'red') {
+          if (redMarker !== null) {
+             redMarker.setMap(null);
+         }
+      } else if (color === 'boom') {
+          for(var i=0; i<allMarker.length;i++) {
+            allMarker[i].setMap(null);
+          }
+      }
+  } // loppuu
+  
+  
   document.createPath = function createPath(pathArray, pathColor, speed) {
     var src = new google.maps.LatLng(pathArray[0], pathArray[1]);
     var dest = new google.maps.LatLng(pathArray[2], pathArray[3]);
@@ -70,6 +97,9 @@
     var service = new google.maps.DirectionsService();
     var poly = new google.maps.Polyline({map: document.map, strokeColor: pathColor});
     polyMarkerArray.push(poly);
+    
+    blueMarker = null; // Oma lisäys, ei poisteta venhojen reittien päätepisteitä
+    redMarker = null;
 
     path.push(src);
     poly.setPath(path);

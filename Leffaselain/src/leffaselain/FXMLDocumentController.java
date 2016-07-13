@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -43,8 +44,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField hakuPalkki;
     
+    private ArrayList<String> leffanimilista = new ArrayList();
     
-    
+    private ArrayList<String> esitysajat = new ArrayList();
+    private String[] asdd;
+    private String aargh, aika;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -134,6 +138,9 @@ public class FXMLDocumentController implements Initializable {
             paivaInput.setText(ft.format(pvm));
         }
         
+        leffanimilista.clear();
+        esitysajat.clear();
+        
         String date = paivaInput.getText();
         
         String nimi = hakuPalkki.getText();
@@ -156,11 +163,26 @@ public class FXMLDocumentController implements Initializable {
             
             zeta = tel.tarkistaOnko(nimi, sisalto);
             //System.out.println("Weeee");
+            aika = zeta.substring(0, 5);
+            aargh = zeta.substring(6, zeta.length());
             if (zeta.equals("")) {
                 continue;
+            } else if (!leffanimilista.contains(aargh)) {
+                leffanimilista.add(aargh); // PELKKÄ nimi
             }
-            filmList.getItems().add(zeta + "\t" + teatteri.getPaikka());
+            esitysajat.add(aika + " " + teatteri.getPaikka() + " %" + aargh); // "17:30 Espoo %Warcraft: The Beginning"
         }
+        
+        for (String leffanimi : leffanimilista) {
+            filmList.getItems().add(leffanimi);
+            for (String esitys : esitysajat) {
+                asdd = esitys.split("%");
+                if (asdd[1].equals(leffanimi)) {
+                    filmList.getItems().add("\t" + asdd[0]);
+                }
+            }
+        }
+        
         
         System.out.println("Leffahaku ajettu");
     }

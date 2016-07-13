@@ -4,28 +4,35 @@
  * and open the template in the editor.
  */
 
-package smartposter;
+package karttapiirturi;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
  *
  * @author k4873
  */
-public class SmartPoster extends Application {
+public class Karttapiirturi extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
-        Scene scene = new Scene(root);
+        stage.setTitle("Afrikan Tähti Homemade Edition");
         
+        AnchorPane base = new AnchorPane();
+        
+        
+        Scene scene = new Scene(root);
+        root.setStyle("-fx-background-image: url('" + getClass().getResource("suomenkartta.jpeg").toExternalForm() + "')");
+
+
         stage.setScene(scene);
-        stage.setTitle("Timotei");
         stage.show();
     }
 
