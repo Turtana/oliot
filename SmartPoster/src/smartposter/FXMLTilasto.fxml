@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="790.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLTilastoController">
+   <children>
+      <TableView fx:id="historyTable" layoutX="14.0" layoutY="14.0" prefHeight="324.0" prefWidth="758.0" style="-fx-background-color: orange;">
+        <columns>
+          <TableColumn fx:id="kelloSarake" prefWidth="144.0" text="Kellonaika" />
+          <TableColumn fx:id="lahtoSarake" prefWidth="117.0" text="Lähtöpaikka" />
+            <TableColumn fx:id="kohdeSarake" minWidth="5.0" prefWidth="134.0" text="Kohdepaikka" />
+            <TableColumn fx:id="esineSarake" minWidth="0.0" prefWidth="135.0" text="Esine" />
+            <TableColumn fx:id="pakettiSarake" prefWidth="127.0" text="Paketti" />
+            <TableColumn fx:id="matkaSarake" prefWidth="100.0" text="Matka (km)" />
+        </columns>
+      </TableView>
+      <Button layoutX="618.0" layoutY="355.0" mnemonicParsing="false" onAction="#nukeHistory" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: orange;" text="Tyhjennä historia" />
+   </children>
+</AnchorPane>

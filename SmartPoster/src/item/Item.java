@@ -29,7 +29,11 @@ public class Item {
     }
     
     public String kuvaile() {
-        return kuvaus;
+        String rikki = "Kestävä";
+        if (breakable) {
+            rikki = "Särkyvä";
+        }
+        return kuvaus + "\n\nKoko: " + koko + "\n" + rikki;
     }
     
     public int getId () {
@@ -41,6 +45,7 @@ public class Item {
     }
     
     public boolean isBreakable() {
+        System.out.println("Onko esine särkyvä: " + breakable);
         return breakable;
     }
 }

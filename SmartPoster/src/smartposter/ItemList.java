@@ -126,6 +126,7 @@ public class ItemList {
             while (rs.next()) {
                 itemlista.add(new Item(rs.getInt("itemid"), rs.getString("description"),
                     rs.getInt("size"), rs.getBoolean("breakable"), rs.getString("name")));
+                
             }
         } catch (/*ClassNotFoundException | */SQLException ex) {
             Logger.getLogger(ItemList.class.getName()).log(Level.SEVERE, null, ex);
@@ -145,11 +146,6 @@ public class ItemList {
     public static void addItem (Item s) { // Lisää tietokantaan Itemin s
         urli = "jdbc:sqlite:timotei.db";
         try {
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ItemList.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             con = DriverManager.getConnection(urli);
             PreparedStatement varm = con.prepareStatement("SELECT itemid FROM item WHERE itemid = ?;");
             varm.setInt(1, s.getId());
@@ -159,7 +155,6 @@ public class ItemList {
                 con.close();
                 return;
             }
-            
             PreparedStatement viuh = con.prepareStatement("INSERT INTO "
                     + "item(itemid,name,size,breakable,description) "
                     + "VALUES (?, ?, ?, ?, ?);");
@@ -212,11 +207,6 @@ public class ItemList {
     
     public static void nukeFlash () {
         urli = "jdbc:sqlite:timotei.db";
-        try {
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ItemList.class.getName()).log(Level.SEVERE, null, ex);
-        }
         try {
             con = DriverManager.getConnection(urli);
             PreparedStatement pois = con.prepareStatement("DELETE FROM item;"); // BOOOOOM

@@ -7,22 +7,12 @@ speed integer,
 maxdistance integer,
 size integer,
 safe boolean,
-desc text);
-INSERT INTO "package" VALUES(0,'Pikavauhti',1,150,2,'false', 'Pikavauhtia määränpäähän vaaroista välittämättä. Ei kulje 150 km pidemmälle.
-
-Koko: 2
-Nopeus: 3
-Turvallinen: Ei');
-INSERT INTO "package" VALUES(1,'Turvakyyti',2,16000,1,'true', 'Turvallinen mutta ahdas kyyti varovaisille postittajille.
-
-Koko: 1
-Nopeus: 2
-Turvallinen: Kyllä');
-INSERT INTO "package" VALUES(2,'Stressipurku',3,1000,3,'false', 'Timotei-miehellä on känkkäränkkäpäivä. Älä postita särkyvää.
-
-Koko: 3
-Nopeus: 1
-Turvallinen: Ei');
+desc text,
+CHECK (speed > 0 AND speed < 4),
+CHECK (size > 0));
+INSERT INTO "package" VALUES(0,'Pikavauhti',1,150,2,0,'Pikavauhtia määränpäähän vaaroista välittämättä. Ei kulje 150 km pidemmälle.');
+INSERT INTO "package" VALUES(1,'Turvakyyti',2,16000,1,1,'Turvallinen mutta ahdas kyyti varovaisille postittajille.');
+INSERT INTO "package" VALUES(2,'Stressipurku',3,1000,3,0,'Timotei-miehellä on känkkäränkkäpäivä. Älä postita särkyvää.');
 CREATE TABLE warehouse (
 wareid int primary key,
 itemid int,
@@ -50,38 +40,28 @@ CREATE TABLE item (
 itemid integer primary key,
 name varchar (32),
 size integer,
-breakable bool,
+breakable boolean,
 description text);
-INSERT INTO "item" VALUES(0,'Taulutelkkari',2,'true','Pysy ajan tasalla maailman menosta, käytä pelikonsolin kuvaputkena tai syövytä aivosi tosi-tv:llä.
 
-Koko: 2
-Särkyvä');
-INSERT INTO "item" VALUES(1,'Maitotölkki',1,'false','Tölkki kestää kovaakin kuritusta. Ja vahvistaa luita. Siis sisällä oleva maito.
+INSERT INTO "item" VALUES(0,'Taulutelkkari',2,1,'Pysy ajan tasalla maailman menosta, käytä pelikonsolin kuvaputkena tai syövytä aivosi tosi-tv:llä.');
+INSERT INTO "item" VALUES(1,'Maitotölkki',1,0,'Tölkki kestää kovaakin kuritusta. Ja vahvistaa luita. Siis sisällä oleva maito.');
+INSERT INTO "item" VALUES(2,'Halkomotti',3,0,'Kuutiometri koivunklapeja talvi-iltojen lämmikkeeksi. Tai askartele oma Mölkky.');
+INSERT INTO "item" VALUES(3,'Jalkapallo',1,0,'Aseta maahan, potkaise ja juokse karkuun ennen kuin ikkunan maksajaa aletaan etsiskellä.');
+INSERT INTO "item" VALUES(4,'Joustinpatja',3,0,'Herneitä patjan alta on turha hakea, mutta muuta elämää löytyy senkin edestä. Myrkky maksaa erikseen.');
+INSERT INTO "item" VALUES(5,'Pyrypallo',1,1,'Sen sisällä on kokonainen pieni maailma. Ikävä kyllä kesä ei koita koskaan.');
+INSERT INTO "item" VALUES(6,'Moai-patsas',10,0,'Jonkun matkamuisto Pääsiäissaarelta. Mihinkään pakettiin sitä taitaa olla turha yrittää tunkea.');
+INSERT INTO "item" VALUES(7,'Dynamiittilaatikko',1,1,'Työajan säästämiseksi nallit on viritetty valmiiksi. Kannattaa ehkä käsitellä varovasti.');
 
-Koko: 1
-Kestävä');
-INSERT INTO "item" VALUES(2,'Halkomotti',3,'false','Kuutiometri koivunklapeja talvi-iltojen lämmikkeeksi. Tai askartele oma Mölkky.
-
-Koko: 3
-Kestävä');
-INSERT INTO "item" VALUES(3,'Jalkapallo',1,'false','Aseta maahan, potkaise ja juokse karkuun ennen kuin ikkunan maksajaa aletaan etsiskellä.
-
-Koko: 1
-Kestävä');
-INSERT INTO "item" VALUES(4,'Joustinpatja',3,'false','Herneitä patjan alta on turha hakea, mutta muuta elämää löytyy senkin edestä. Myrkky maksaa erikseen.
-
-Koko: 3
-Kestävä');
-INSERT INTO "item" VALUES(5,'Pyrypallo',1,'true','Sen sisällä on kokonainen pieni maailma. Ikävä kyllä kesä ei koita koskaan.
-
-Koko: 1
-Särkyvä');
-INSERT INTO "item" VALUES(6,'Moai-patsas',10,'false','Jonkun matkamuisto Pääsiäissaarelta. Mihinkään pakettiin sitä taitaa olla turha yrittää tunkea.
-
-Koko: 10
-Kestävä');
-INSERT INTO "item" VALUES(7,'Dynamiittilaatikko',1,'true','Työajan säästämiseksi nallit on viritetty valmiiksi. Kannattaa ehkä käsitellä varovasti.
-
-Koko: 1
-Särkyvä');
+CREATE TABLE history (
+eventid integer primary key,
+eventtime varchar (20),
+startid integer,
+destid integer,
+packageid integer,
+itemid integer,
+distance double,
+foreign key(startid) references smartpost(smartid),
+foreign key(destid) references smartpost(smartid),
+foreign key(packageid) references package(packageid),
+foreign key(itemid) references item(itemid));
 COMMIT;

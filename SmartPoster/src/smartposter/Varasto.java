@@ -26,9 +26,11 @@ public class Varasto {
     
     Connection con = null;
     
-    private final ArrayList<Pakkaus> lista; // JA TÄMÄ SITTEN TIETOKANNOILLA!
+    private final ArrayList<Pakkaus> lista;
     
     private static String errori; // Laitetaan nyt yleinen virheteksti vaikka tänne. 
+    
+    private ArrayList<Integer> varatut = new ArrayList();
     
     private Varasto () {
         lista = new ArrayList();
@@ -48,8 +50,16 @@ public class Varasto {
             PreparedStatement check = con.prepareStatement("SELECT wareid FROM warehouse;");
             ResultSet z = check.executeQuery();
             while (z.next()) { // Etsitään seuraava vapaa id
-                laskuri++;
+                varatut.add(z.getInt("wareid"));
             }
+            for (int l = 0; l <= varatut.size(); l++) {
+                if (!varatut.contains(l)) { // Vapaa id löytyi, jos ei muuta niin viimeinen
+                    laskuri = l;
+                    break;
+                }
+            }
+            
+            System.out.println(laskuri);
             PreparedStatement lisaa = con.prepareStatement("INSERT INTO warehouse(wareid, itemid, packageid) VALUES (?, ?, ?)");
             lisaa.setInt(1, laskuri);
             lisaa.setInt(2, p.avaa().getId());
@@ -107,6 +117,30 @@ public class Varasto {
         
         return lista;
     }
+    
+    public void delThing (Pakkaus p) {
+        try {
+            con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
+            PreparedStatement vex = con.prepareStatement("DELETE "
+                    + "FROM warehouse WHERE itemid = ? AND packageid = ?;");
+            vex.setInt(1, p.avaa().getId());
+            vex.setInt(2, p.getId());
+            vex.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Varasto.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Varasto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        System.out.println(p + " poistettu");
+    }
+    
     
     // Virheilmoitukset alla
     

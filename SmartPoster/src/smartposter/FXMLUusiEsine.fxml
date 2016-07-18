@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="295.0" prefWidth="204.0" style="-fx-background-color: blue;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="smartposter.FXMLUusiEsineController">
+<AnchorPane id="AnchorPane" prefHeight="295.0" prefWidth="204.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLUusiEsineController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" prefHeight="29.0" prefWidth="156.0" style="-fx-text-fill: orange;" text="Uusi esine">
          <font>
@@ -22,7 +21,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <TextArea fx:id="kuvausArea" layoutX="14.0" layoutY="128.0" prefHeight="112.0" prefWidth="171.0" promptText="Kuvaus" />
+      <TextArea fx:id="kuvausArea" layoutX="14.0" layoutY="128.0" prefHeight="112.0" prefWidth="171.0" promptText="Kuvaus" wrapText="true" />
       <Button fx:id="peruutaNappi" layoutX="14.0" layoutY="256.0" mnemonicParsing="false" onAction="#peruuta" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: orange;" text="Peruuta" />
       <Button layoutX="111.0" layoutY="256.0" mnemonicParsing="false" onAction="#OK" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: orange;" text="OK" />
    </children>

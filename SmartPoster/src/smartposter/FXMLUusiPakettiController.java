@@ -110,6 +110,7 @@ public class FXMLUusiPakettiController implements Initializable {
                 default:
                     System.out.println("nope");
             }
+            FXMLDocumentController.refreshWares();
             closePopup();
         }
     }

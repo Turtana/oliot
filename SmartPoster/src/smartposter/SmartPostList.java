@@ -90,8 +90,8 @@ public class SmartPostList {
             PreparedStatement kaik = con.prepareStatement("SELECT "
                     + "smartpost.smartid, address.code, address.city, address.street, "
                     + "smartpost.availability, smartpost.postoffice, coords.lat, coords.lon "
-                    + "FROM (smartpost INNER JOIN coords ON smartpost.smartid = coords.coordid) "
-                    + "INNER JOIN address ON smartpost.smartid = address.addressid;");
+                    + "FROM (smartpost INNER JOIN coords ON smartpost.coordid = coords.coordid) "
+                    + "INNER JOIN address ON smartpost.coordid = address.addressid;");
             ResultSet rs = kaik.executeQuery();
             while (rs.next()) {
                 smartlista.add(new SmartPost(rs.getInt("smartid"), rs.getString("code"),
@@ -127,13 +127,15 @@ public class SmartPostList {
                 return;
             }
             PreparedStatement viuh = con.prepareStatement("INSERT INTO "
-                    + "smartpost(smartid,availability,postoffice) "
-                    + "VALUES (?, ?, ?);");
+                    + "smartpost(smartid,availability,postoffice, addressid, coordid) "
+                    + "VALUES (?, ?, ?, ?, ?);");
             // id, p-numero, kaupunki, osoite, aukiolo, toimisto, lat, lon
 
             viuh.setInt(1, s.getId()); // Pääavain
             viuh.setString(2, s.getAva());
             viuh.setString(3, s.getPost());
+            viuh.setInt(4, s.getId());
+            viuh.setInt(5, s.getId());
             viuh.executeUpdate();
             
             viuh = con.prepareStatement("INSERT INTO "
