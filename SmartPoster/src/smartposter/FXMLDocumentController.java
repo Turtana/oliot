@@ -302,7 +302,7 @@ public class FXMLDocumentController implements Initializable {
     
     private double calculateDistance (String[] s) { // Linnuntietä vetää, mutta vetäköön
         double d;
-        double sade = 6378.137;
+        double sade = 6378.137; // Huomasin vasta hyvin myöhään, että viivanvetäjäfunktio indexissä palauttaa välimatkan. Käytetään nyt tätä.
         double dLat = (Double.parseDouble(s[0]) - Double.parseDouble(s[2])) * Math.PI / 180;
         double dLon = (Double.parseDouble(s[1]) - Double.parseDouble(s[3])) * Math.PI / 180;
         double a = Math.sin(dLat/2) * Math.sin(dLat/2) +

@@ -107,7 +107,7 @@ public class SmartPostList {
                 }
             }
         }
-        System.out.println("Palautetaan lista");
+        //System.out.println("Palautetaan lista");
         return smartlista;
     }
     
