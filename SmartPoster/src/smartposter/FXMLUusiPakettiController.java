@@ -84,7 +84,7 @@ public class FXMLUusiPakettiController implements Initializable {
                 || comboEsine.getSelectionModel().isEmpty()) {
             varus.setError("Anna sekä esine että pakettityyppi! Tyhjät paketit ja irtoesineet ovat kiellettyjä.");
             virhe = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("FXMLVirhe.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/smartposter/FXMLVirhe.fxml"));
             Scene scene = new Scene(root);
             virhe.setTitle("Liian vähän parametreja");
             virhe.setScene(scene);
@@ -110,7 +110,7 @@ public class FXMLUusiPakettiController implements Initializable {
                 default:
                     System.out.println("nope");
             }
-            FXMLDocumentController.refreshWares();
+            //FXMLDocumentController.refreshWares();
             closePopup();
         }
     }
@@ -130,15 +130,6 @@ public class FXMLUusiPakettiController implements Initializable {
                 comboEsine.getItems().add(new Item(rs.getInt("itemid"), rs.getString("description"),
                         rs.getInt("size"), rs.getBoolean("breakable"), rs.getString("name")));
             }
-            
-            /*comboEsine.getItems().add(new Telkkari());
-            comboEsine.getItems().add(new Maito());
-            comboEsine.getItems().add(new Halko());
-            comboEsine.getItems().add(new Jalkapallo()); // Mitä Hello Kittyä näillä sitten tekee??
-            comboEsine.getItems().add(new Patja());
-            comboEsine.getItems().add(new Pyrypallo());
-            comboEsine.getItems().add(new Moai());
-            comboEsine.getItems().add(new Dynamiitti());*/
         } catch (SQLException ex) {
             System.out.println("No voi herttinen sentään.");
             Logger.getLogger(FXMLUusiPakettiController.class.getName()).log(Level.SEVERE, null, ex);
@@ -165,12 +156,11 @@ public class FXMLUusiPakettiController implements Initializable {
     private void eiMahdu(Item i) throws IOException {
         varus.setError(i.toString() + " ei mahdu valitsemaasi pakettiin! Valitse isompi paketti tai luovu leikistä.");
         virhe = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLVirhe.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/smartposter/FXMLVirhe.fxml"));
         Scene scene = new Scene(root);
         virhe.setTitle("Liian pieni paketti");
         virhe.setScene(scene);
         virhe.sizeToScene();
         virhe.show();
     }
-    
 }

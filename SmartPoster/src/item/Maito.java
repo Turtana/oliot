@@ -12,6 +12,6 @@ package item;
  */
 public class Maito extends Item {
     public Maito () {
-        super(1, "Tölkki kestää kovaakin kuritusta. Ja vahvistaa luita. Siis sisällä oleva maito.\n\nKoko: 1\nKestävä", 1, false, "Maitotölkki");
+        super(1, "Tölkki kestää kovaakin kuritusta. Ja vahvistaa luita. Siis sisällä oleva maito.", 1, false, "Maitotölkki");
     }
 }

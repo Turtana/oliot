@@ -12,6 +12,6 @@ package item;
  */
 public class Dynamiitti extends Item {
     public Dynamiitti () {
-        super(7, "Työajan säästämiseksi nallit on viritetty valmiiksi. Kannattaa ehkä käsitellä varovasti.\n\nKoko: 1\nSärkyvä", 1, true, "Dynamiittilaatikko");
+        super(7, "Työajan säästämiseksi nallit on viritetty valmiiksi. Kannattaa ehkä käsitellä varovasti.", 1, true, "Dynamiittilaatikko");
     }
 }

@@ -8,19 +8,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="268.0" prefWidth="350.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLUusiPakettiController">
+<AnchorPane id="AnchorPane" prefHeight="268.0" prefWidth="373.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLUusiPakettiController">
    <children>
       <ComboBox fx:id="comboEsine" layoutX="11.0" layoutY="14.0" prefWidth="150.0" promptText="Valitse esine" style="-fx-background-color: orange;" />
-      <ComboBox fx:id="comboPakkaus" layoutX="190.0" layoutY="14.0" prefWidth="150.0" promptText="Valitse pakkaus" style="-fx-background-color: orange;" />
+      <ComboBox fx:id="comboPakkaus" layoutX="174.0" layoutY="14.0" prefHeight="25.0" prefWidth="184.0" promptText="Valitse pakkaus" style="-fx-background-color: orange;" />
       <Label fx:id="esineLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="51.0" onMouseEntered="#labelRefresh" prefHeight="169.0" prefWidth="150.0" textFill="ORANGE" wrapText="true">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font size="14.0" />
          </font></Label>
-      <Label fx:id="pakkausLabel" alignment="TOP_LEFT" layoutX="184.0" layoutY="51.0" onMouseEntered="#labelRefresh" prefHeight="169.0" prefWidth="150.0" textFill="ORANGE" wrapText="true">
+      <Label fx:id="pakkausLabel" alignment="TOP_LEFT" layoutX="175.0" layoutY="51.0" onMouseEntered="#labelRefresh" prefHeight="169.0" prefWidth="184.0" textFill="ORANGE" wrapText="true">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font size="14.0" />
          </font></Label>
-      <Button layoutX="277.0" layoutY="229.0" mnemonicParsing="false" onAction="#verify" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: orange;" text="Jatka" />
-      <Button fx:id="sulkuNappi" layoutX="179.0" layoutY="229.0" mnemonicParsing="false" onAction="#closePopup" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: orange;" text="Peruuta" />
+      <Button layoutX="272.0" layoutY="229.0" mnemonicParsing="false" onAction="#verify" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: orange;" text="Jatka" />
+      <Button fx:id="sulkuNappi" layoutX="174.0" layoutY="229.0" mnemonicParsing="false" onAction="#closePopup" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: orange;" text="Peruuta" />
    </children>
 </AnchorPane>

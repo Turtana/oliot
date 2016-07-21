@@ -12,6 +12,6 @@ package item;
  */
 public class Telkkari extends Item {
     public Telkkari () {
-        super(0, "Pysy ajan tasalla maailman menosta, käytä pelikonsolin kuvaputkena tai syövytä aivosi tosi-tv:llä.\n\nKoko: 2\nSärkyvä", 2, true, "Taulutelkkari");
+        super(0, "Pysy ajan tasalla maailman menosta, käytä pelikonsolin kuvaputkena tai syövytä aivosi tosi-tv:llä.", 2, true, "Taulutelkkari");
     }
 }

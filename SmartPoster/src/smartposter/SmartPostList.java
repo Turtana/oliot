@@ -22,13 +22,11 @@ import java.util.logging.Logger;
 public class SmartPostList {
     
     private static SmartPostList spl = null;
-    private static String urli;
-    private static Connection con;
-    private static SmartPost lahetys;
-    private static ArrayList<SmartPost> smartlista;
+    private Connection con;
+    private SmartPost lahetys;
+    private ArrayList<SmartPost> smartlista;
     
     private SmartPostList () {
-        urli = "jdbc:sqlite:timotei.db";
         smartlista = new ArrayList();
     }
     
@@ -39,7 +37,7 @@ public class SmartPostList {
         return spl;
     }
     
-    public static SmartPost getPost (int i) { // Kaivaa tietokannasta SmartPostin, jonka id on i
+    public SmartPost getPost (int i) { // Kaivaa tietokannasta SmartPostin, jonka id on i
         lahetys = null;
         try {
             Class.forName("org.sqlite.JDBC");
@@ -49,7 +47,7 @@ public class SmartPostList {
         ResultSet rs;
         
         try {
-            con = DriverManager.getConnection(urli);
+            con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
             PreparedStatement viuh = con.prepareStatement("SELECT "
                     + "smartpost.smartid, address.code, address.city, address.street, "
                     + "smartpost.availability, smartpost.postoffice, coords.lat, coords.lon "
@@ -81,12 +79,12 @@ public class SmartPostList {
         return lahetys;
     }
     
-    public static ArrayList<SmartPost> getAllPosts () {
+    public ArrayList<SmartPost> getAllPosts () {
         smartlista.clear();
         
         try {
             //Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection(urli);
+            con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
             PreparedStatement kaik = con.prepareStatement("SELECT "
                     + "smartpost.smartid, address.code, address.city, address.street, "
                     + "smartpost.availability, smartpost.postoffice, coords.lat, coords.lon "
@@ -117,7 +115,7 @@ public class SmartPostList {
         //Class.forName("org.sqlite.JDBC");
         //System.out.println("Lisätään " + s.getId());
         try {
-            con = DriverManager.getConnection(urli);
+            con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
             PreparedStatement varm = con.prepareStatement("SELECT smartid FROM smartpost WHERE smartid = ?;");
             varm.setInt(1, s.getId());
             ResultSet r = varm.executeQuery();
@@ -166,12 +164,12 @@ public class SmartPostList {
         }
     }
     
-    public static void removePost(SmartPost s) { // Poistaa SmartPost s:n tietokannasta
+    public void removePost(SmartPost s) { // Poistaa SmartPost s:n tietokannasta
 
         //Class.forName("org.sqlite.JDBC");
  
         try {
-            con = DriverManager.getConnection(urli);
+            con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
             PreparedStatement pois = con.prepareStatement("DELETE FROM smartpost WHERE smartid = ?;");
             pois.setInt(1, s.getId());
             pois.executeUpdate();
@@ -194,12 +192,12 @@ public class SmartPostList {
         }
     }
     
-    public static void nukeFlash () {
+    public void nukeFlash () {
 
         //Class.forName("org.sqlite.JDBC");
 
         try {
-            con = DriverManager.getConnection(urli);
+            con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
             PreparedStatement pois = con.prepareStatement("DELETE FROM smartpost;");
             pois.executeUpdate();
             pois = con.prepareStatement("DELETE FROM address;");

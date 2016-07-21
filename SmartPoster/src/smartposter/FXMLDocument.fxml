@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
@@ -9,32 +10,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="772.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLDocumentController">
    <children>
       <WebView fx:id="kartta" layoutX="200.0" prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Pane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: blue;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button layoutX="17.0" layoutY="90.0" mnemonicParsing="false" onAction="#createPacket" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange; -fx-font-style: Bold;" text="Luo uusi paketti" />
-            <ComboBox fx:id="comboPaketti" layoutX="17.0" layoutY="138.0" onAction="#poistoVisible" prefHeight="34.0" prefWidth="167.0" promptText="Valitse paketti" style="-fx-background-color: orange; -fx-font-style: Bold;" />
-            <Label fx:id="titleText" layoutX="17.0" layoutY="11.0" prefHeight="48.0" prefWidth="167.0" style="-fx-text-fill: orange;" text="Timotei">
+            <Button layoutX="17.0" layoutY="88.0" mnemonicParsing="false" onAction="#createPacket" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange;" text="Luo uusi paketti" />
+            <ComboBox fx:id="comboPaketti" layoutX="17.0" layoutY="138.0" onAction="#poistoVisible" onMouseEntered="#refreshWares" prefHeight="34.0" prefWidth="167.0" promptText="Valitse paketti" style="-fx-background-color: orange;" />
+            <Label fx:id="titleText" layoutX="17.0" layoutY="11.0" prefHeight="48.0" prefWidth="167.0" text="Timotei" textFill="ORANGE">
                <font>
                   <Font name="Arial Black" size="40.0" />
                </font>
             </Label>
             <Pane layoutY="186.0" prefHeight="78.0" prefWidth="200.0" style="-fx-background-color: #0066CC;">
                <children>
-                  <ComboBox fx:id="comboPost" layoutX="16.0" layoutY="15.0" onAction="#drawIt" prefHeight="48.0" prefWidth="167.0" promptText="Lähetyspaikka" style="-fx-background-color: orange; -fx-font-style: Bold;" />
+                  <ComboBox fx:id="comboPost" layoutX="16.0" layoutY="15.0" onAction="#drawIt" onMouseEntered="#refreshPosts" prefHeight="48.0" prefWidth="167.0" promptText="Lähetyspaikka" style="-fx-background-color: orange;" />
                </children>
             </Pane>
             <Pane layoutY="276.0" prefHeight="78.0" prefWidth="200.0" style="-fx-background-color: #FF6666;">
                <children>
-                  <ComboBox fx:id="comboVasta" layoutX="17.0" layoutY="14.0" onAction="#drawThat" prefHeight="48.0" prefWidth="167.0" promptText="Vastaanottaja" style="-fx-background-color: orange; -fx-font-style: Bold;" />
+                  <ComboBox fx:id="comboVasta" layoutX="17.0" layoutY="14.0" onAction="#drawThat" onMouseEntered="#refreshPostsv" prefHeight="48.0" prefWidth="167.0" promptText="Vastaanottaja" style="-fx-background-color: orange;" />
                </children>
             </Pane>
-            <Button layoutX="17.0" layoutY="365.0" mnemonicParsing="false" onAction="#lahetaPaketti" onMouseExited="#karttaFokus" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange; -fx-font-style: Bold;" text="Lähetä!" />
-            <Button layoutX="17.0" layoutY="553.0" mnemonicParsing="false" onAction="#hardReset" onMouseExited="#karttaFokus" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange;" text="Tyhjennä kartta" />
-            <Button layoutX="17.0" layoutY="505.0" mnemonicParsing="false" onAction="#hallitseKantoja" onMouseExited="#karttaFokus" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange;" text="Tietokanta-asetukset" />
-            <Button layoutX="17.0" layoutY="458.0" mnemonicParsing="false" onAction="#openHistory" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange;" text="Lähetyshistoria" />
+            <Button layoutX="17.0" layoutY="366.0" mnemonicParsing="false" onAction="#lahetaPaketti" onMouseExited="#karttaFokus" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange;" text="Lähetä!" />
+            <Button layoutX="17.0" layoutY="720.0" mnemonicParsing="false" onAction="#hardReset" onMouseExited="#karttaFokus" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange;" text="Tyhjennä kartta" />
+            <Button layoutX="17.0" layoutY="672.0" mnemonicParsing="false" onAction="#hallitseKantoja" onMouseExited="#karttaFokus" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange;" text="Tietokanta-asetukset" />
+            <Button layoutX="17.0" layoutY="625.0" mnemonicParsing="false" onAction="#openHistory" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: orange;" text="Lähetyshistoria" />
          </children>
       </Pane>
       <Label fx:id="karttanappula" alignment="CENTER" layoutX="200.0" onMouseClicked="#tiekartta" onMouseEntered="#labelPop" onMouseExited="#labelExit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: blue; -fx-text-fill: orange;" text="&gt;" textFill="WHITE" AnchorPane.topAnchor="0.0">

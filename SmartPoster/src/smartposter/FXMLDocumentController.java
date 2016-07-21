@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -48,15 +49,15 @@ public class FXMLDocumentController implements Initializable {
     private SmartPostList slist = SmartPostList.getInstance();
     
     @FXML
-    private static ComboBox<SmartPost> comboPost;
+    private ComboBox<SmartPost> comboPost;
     @FXML
-    private static ComboBox<SmartPost> comboVasta;//anottaja
+    private ComboBox<SmartPost> comboVasta;//anottaja
 
     @FXML
     private Label karttanappula;
     
     @FXML
-    private static ComboBox<Pakkaus> comboPaketti;
+    private ComboBox<Pakkaus> comboPaketti;
     
     private String nappulatext = "Satelliitti";
     private static Varasto varas = Varasto.getInstance();
@@ -71,7 +72,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label titleText;
     @FXML
-    private static Pane poistoPane;
+    private Pane poistoPane;
     @FXML
     private Ellipse satelliteDish;
 
@@ -86,7 +87,7 @@ public class FXMLDocumentController implements Initializable {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
         titleText.setTooltip(new Tooltip("Toiminnaltaan Itellaa Muistuttava Ohjelmisto,\nTietokantaa Edellyttävä Integraatio"));
-    }    
+    }
   
     @FXML
     private void tiekartta() {
@@ -123,7 +124,7 @@ public class FXMLDocumentController implements Initializable {
     private void createPacket(ActionEvent event) {
         try {
             popuppi = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("FXMLUusiPaketti.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/smartposter/FXMLUusiPaketti.fxml"));
             Scene scene = new Scene(root);
             
             popuppi.setTitle("Uusi paketti");
@@ -136,7 +137,8 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    public static void refreshWares() {
+    @FXML
+    public void refreshWares() {
         comboPaketti.getItems().clear();
         for (Pakkaus p : varas.getList()) {
             comboPaketti.getItems().add(p);
@@ -171,7 +173,7 @@ public class FXMLDocumentController implements Initializable {
                 + temp.getAddress() + "', '" + temp.getInfo() + "', 'red')");
         kartta.requestFocus();
     }
-
+    
     @FXML
     private void lahetaPaketti(ActionEvent event) throws IOException {
         
@@ -203,7 +205,7 @@ public class FXMLDocumentController implements Initializable {
                 if (matka > comboPaketti.getSelectionModel().getSelectedItem().getMatka()) {
                     varas.setError("Valitsemaasi pakettia ei voi lähettää noin kauas!"); // !!!
                     virhe = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("FXMLVirhe.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/smartposter/FXMLVirhe.fxml"));
                     Scene scene = new Scene(root);
                     virhe.setTitle("Liian pitkä matka");
                     virhe.setScene(scene);
@@ -224,30 +226,60 @@ public class FXMLDocumentController implements Initializable {
     }
     
     private void forHistorySake(double mat) throws SQLException { // Merkkaa jokaisen tehdyn lähetyksen historiankirjoihin
+        String siti = "";
         Connection con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
         Date nyt = new Date();
         SimpleDateFormat fort = new SimpleDateFormat ("dd.MM.yyyy hh:mm:ss");
         int laskuri = 0;
         try {
             
-            PreparedStatement check = con.prepareStatement("SELECT eventid FROM history;");
+            PreparedStatement check = con.prepareStatement("SELECT eventid FROM event;");
             ResultSet z = check.executeQuery();
             while (z.next()) { // Etsitään seuraava vapaa id
                 laskuri++; // Joka on arvoltaan laskuri
             }
             String g = String.format(Locale.US, "%.2f", mat);
             mat = Double.parseDouble(g);
-            PreparedStatement hist = con.prepareStatement("INSERT INTO history "
-                    + "(eventid, eventtime, startid, destid, packageid, itemid, distance) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?);");
+            PreparedStatement hist = con.prepareStatement("INSERT INTO event "
+                    + "(eventid, startid, destid, packageid, itemid) "
+                    + "VALUES (?, ?, ?, ?, ?);");
             hist.setInt(1, laskuri);
-            hist.setString(2, fort.format(nyt));
-            hist.setInt(3, comboPost.getSelectionModel().getSelectedItem().getId());
-            hist.setInt(4, comboVasta.getSelectionModel().getSelectedItem().getId());
-            hist.setInt(5, comboPaketti.getSelectionModel().getSelectedItem().getId());
-            hist.setInt(6, comboPaketti.getSelectionModel().getSelectedItem().avaa().getId());
-            hist.setDouble(7, mat);
+            hist.setInt(2, comboPost.getSelectionModel().getSelectedItem().getId());
+            hist.setInt(3, comboVasta.getSelectionModel().getSelectedItem().getId());
+            hist.setInt(4, comboPaketti.getSelectionModel().getSelectedItem().getId());
+            hist.setInt(5, comboPaketti.getSelectionModel().getSelectedItem().avaa().getId());
             hist.executeUpdate();
+            
+            hist = con.prepareStatement("SELECT address.city " // Pitää vetää kaksi hakua, ettei mene sekaisin smartpost-kaupungit.
+                    + "FROM (event INNER JOIN smartpost ON event.startid = smartpost.smartid) "
+                    + "INNER JOIN address ON smartpost.smartid = address.addressid "
+                    + "WHERE event.eventid = ?;");
+            hist.setInt(1, laskuri);
+            z = hist.executeQuery();
+            if (z.next()) {
+                siti = z.getString("city"); // Lähtökaupunki
+            }
+            
+            hist = con.prepareStatement("SELECT address.city, item.name, package.codename "
+                    + "FROM (((event INNER JOIN smartpost ON event.destid = smartpost.smartid) "
+                    + "INNER JOIN address ON smartpost.smartid = address.addressid) "
+                    + "INNER JOIN item ON event.itemid = item.itemid) "
+                    + "INNER JOIN package ON event.packageid = package.packageid "
+                    + "WHERE event.eventid = ?;");
+            hist.setInt(1, laskuri);
+            z = hist.executeQuery();
+            
+            hist = con.prepareStatement("INSERT INTO history "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?);");
+            hist.setInt(1, laskuri); // Id
+            hist.setString(2, fort.format(nyt)); // Kellonaika
+            hist.setString(3, siti); // Lähtökaupunki
+            hist.setString(4, z.getString("city")); // Kohdekaupunki
+            hist.setString(5, z.getString("codename")); // Paketin nimi
+            hist.setString(6, z.getString("name")); // Esineen nimi
+            hist.setDouble(7, mat); // Välimatka
+            hist.executeUpdate();
+            System.out.println("Historiaid: " + laskuri);
             
         } catch (SQLException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -257,9 +289,6 @@ public class FXMLDocumentController implements Initializable {
             }
         }
     }
-    
-    
-
     @FXML
     private void karttaFokus(MouseEvent event) {
         kartta.requestFocus();
@@ -290,7 +319,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void hallitseKantoja(ActionEvent event) throws IOException {
         tietokannat = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLKannat.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/smartposter/FXMLKannat.fxml"));
         Scene scene = new Scene(root);
         tietokannat.setTitle("Muokkaa tietokantoja");
         tietokannat.setScene(scene);
@@ -298,16 +327,21 @@ public class FXMLDocumentController implements Initializable {
         tietokannat.show();
     }
 
-    public static void refreshPosts() throws SQLException, ClassNotFoundException {
+    @FXML
+    public void refreshPosts() throws SQLException, ClassNotFoundException {
         int sad = 0;
+        
         comboPost.getItems().clear();
-        comboVasta.getItems().clear();
-        for (SmartPost a : SmartPostList.getAllPosts()) {
+        //comboVasta.getItems().clear();
+        
+        for (SmartPost a : SmartPostList.getInstance().getAllPosts()) {
             comboPost.getItems().add(a);
-            comboVasta.getItems().add(a);
+            //comboVasta.getItems().add(a);
             sad++;
         }
-        System.out.println("Yhteensä " + sad);
+        System.out.println("Yhteensä " + sad + " SmartPostia");
+        //refreshPostsv();
+        //refreshWares();
     }
 
     @FXML
@@ -325,7 +359,7 @@ public class FXMLDocumentController implements Initializable {
     private void openHistory(ActionEvent event) {
         try {
             historia = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("FXMLTilasto.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/smartposter/FXMLTilasto.fxml"));
             Scene scene = new Scene(root);
             historia.setTitle("Lähetyshistoria");
             historia.setScene(scene);
@@ -334,5 +368,20 @@ public class FXMLDocumentController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void refreshPostsv() {
+        int sad = 0;
+        
+        //comboPost.getItems().clear();
+        comboVasta.getItems().clear();
+        
+        for (SmartPost a : SmartPostList.getInstance().getAllPosts()) {
+            //comboPost.getItems().add(a);
+            comboVasta.getItems().add(a);
+            sad++;
+        }
+        System.out.println("Yhteensä " + sad + " Smartia");
     }
 }

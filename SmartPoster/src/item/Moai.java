@@ -12,6 +12,6 @@ package item;
  */
 public class Moai extends Item {
     public Moai () {
-        super(6, "Jonkun matkamuisto Pääsiäissaarelta. Mihinkään pakettiin sitä taitaa olla turha yrittää tunkea.\n\nKoko: 10\nKestävä", 10, false, "Moai-patsas");
+        super(6, "Jonkun matkamuisto Pääsiäissaarelta. Mihinkään pakettiin sitä taitaa olla turha yrittää tunkea.", 10, false, "Moai-patsas");
     }
 }

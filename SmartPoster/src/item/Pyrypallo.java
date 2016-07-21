@@ -12,6 +12,6 @@ package item;
  */
 public class Pyrypallo extends Item {
     public Pyrypallo () {
-        super(5, "Sen sisällä on kokonainen pieni maailma. Ikävä kyllä kesä ei koita koskaan.\n\nKoko: 1\nSärkyvä", 1, true, "Pyrypallo");
+        super(5, "Sen sisällä on kokonainen pieni maailma. Ikävä kyllä kesä ei koita koskaan.", 1, true, "Pyrypallo");
     }
 }

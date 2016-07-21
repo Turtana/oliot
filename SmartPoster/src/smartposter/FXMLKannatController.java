@@ -6,10 +6,17 @@
 
 package smartposter;
 
+import item.Dynamiitti;
+import item.Halko;
 import item.Item;
+import item.Jalkapallo;
+import item.Maito;
+import item.Moai;
+import item.Patja;
+import item.Pyrypallo;
+import item.Telkkari;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,18 +65,13 @@ public class FXMLKannatController implements Initializable {
 
     @FXML
     private void OK(ActionEvent event) throws ClassNotFoundException, InterruptedException {
-        try {
-            FXMLDocumentController.refreshPosts();
-        } catch (SQLException ex) {
-            Logger.getLogger(FXMLKannatController.class.getName()).log(Level.SEVERE, null, ex);
-        }
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
     }
     
     private void refresh () {
         comboSmart.getItems().clear();
-        for (SmartPost g : SmartPostList.getAllPosts()) {
+        for (SmartPost g : SmartPostList.getInstance().getAllPosts()) {
             comboSmart.getItems().add(g);
         }
     }
@@ -85,13 +87,13 @@ public class FXMLKannatController implements Initializable {
     @FXML
     private void deletePost(ActionEvent event) {
         if (!comboSmart.getSelectionModel().isEmpty())
-            SmartPostList.removePost(comboSmart.getSelectionModel().getSelectedItem());
+            SmartPostList.getInstance().removePost(comboSmart.getSelectionModel().getSelectedItem());
         refresh();
     }
 
     @FXML
     private void nukeEmAll(ActionEvent event) {
-        SmartPostList.nukeFlash();
+        SmartPostList.getInstance().nukeFlash();
         refresh();
     }
 
@@ -100,7 +102,7 @@ public class FXMLKannatController implements Initializable {
         try {
             // Uusi ikkuna esineille
             uusiE = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("FXMLUusiEsine.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/smartposter/FXMLUusiEsine.fxml"));
             Scene scene = new Scene(root);
             uusiE.setTitle("Luo uusi esine");
             uusiE.setScene(scene);
@@ -122,6 +124,22 @@ public class FXMLKannatController implements Initializable {
     @FXML
     private void nukeAllItems(ActionEvent event) {
         ItemList.nukeFlash();
+        restock();
+    }
+
+    @FXML
+    private void oletukset(ActionEvent event) {
+        ItemList.nukeFlash();
+        
+        ItemList.addItem(new Telkkari());
+        ItemList.addItem(new Pyrypallo());
+        ItemList.addItem(new Patja());
+        ItemList.addItem(new Moai());
+        ItemList.addItem(new Maito());
+        ItemList.addItem(new Jalkapallo());
+        ItemList.addItem(new Halko());
+        ItemList.addItem(new Dynamiitti());
+        
         restock();
     }
 }

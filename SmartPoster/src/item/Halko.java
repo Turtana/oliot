@@ -12,6 +12,6 @@ package item;
  */
 public class Halko extends Item {
     public Halko () {
-        super(2, "Kuutiometri koivunklapeja talvi-iltojen lämmikkeeksi. Tai askartele oma Mölkky.\n\nKoko: 3\nKestävä", 3, false, "Halkomotti"); 
+        super(2, "Kuutiometri koivunklapeja talvi-iltojen lämmikkeeksi. Tai askartele oma Mölkky.", 3, false, "Halkomotti"); 
     }
 }

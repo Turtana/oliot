@@ -9,17 +9,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="243.0" prefWidth="378.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLKannatController">
+<AnchorPane id="AnchorPane" prefHeight="266.0" prefWidth="378.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartposter.FXMLKannatController">
    <children>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#downloadPosts" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Lataa SmartPostit" />
-      <Button fx:id="okButton" layoutX="113.0" layoutY="203.0" mnemonicParsing="false" onAction="#OK" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: orange;" text="OK" />
-      <ComboBox fx:id="comboSmart" layoutX="14.0" layoutY="53.0" prefHeight="40.0" prefWidth="164.0" promptText="Valitse SmartPost" style="-fx-background-color: orange;" />
-      <Button layoutX="14.0" layoutY="107.0" mnemonicParsing="false" onAction="#deletePost" prefHeight="40.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Poista valittu SmartPost" textAlignment="CENTER" wrapText="true" />
-      <Button layoutX="201.0" layoutY="14.0" mnemonicParsing="false" onAction="#newItem" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Lisää esine" />
-      <ComboBox fx:id="comboItem" layoutX="201.0" layoutY="53.0" onMouseEntered="#restock" prefHeight="40.0" prefWidth="164.0" promptText="Valitse esine" style="-fx-background-color: orange;" />
-      <Button layoutX="201.0" layoutY="107.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="40.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Poista valittu esine" />
-      <Button layoutX="14.0" layoutY="161.0" mnemonicParsing="false" onAction="#nukeEmAll" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Poista kaikki" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="199.0" layoutY="14.0" mnemonicParsing="false" onAction="#downloadPosts" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Lataa SmartPostit" />
+      <Button fx:id="okButton" layoutX="213.0" layoutY="208.0" mnemonicParsing="false" onAction="#OK" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: orange;" text="OK" />
+      <ComboBox fx:id="comboSmart" layoutX="199.0" layoutY="53.0" prefHeight="40.0" prefWidth="164.0" promptText="Valitse SmartPost" style="-fx-background-color: orange;" />
+      <Button layoutX="199.0" layoutY="107.0" mnemonicParsing="false" onAction="#deletePost" prefHeight="40.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Poista valittu SmartPost" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#newItem" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Lisää esine" />
+      <ComboBox fx:id="comboItem" layoutX="15.0" layoutY="53.0" onMouseEntered="#restock" prefHeight="40.0" prefWidth="164.0" promptText="Valitse esine" style="-fx-background-color: orange;" />
+      <Button layoutX="15.0" layoutY="107.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="40.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Poista valittu esine" />
+      <Button layoutX="199.0" layoutY="161.0" mnemonicParsing="false" onAction="#nukeEmAll" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Poista kaikki" textAlignment="CENTER" wrapText="true" />
       <Line endY="-110.0" fill="BLACK" layoutX="189.0" layoutY="125.0" smooth="false" startY="60.0" strokeWidth="2.0" style="-fx-stroke: orange;" />
-      <Button layoutX="201.0" layoutY="161.0" mnemonicParsing="false" onAction="#nukeAllItems" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Poista kaikki" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="15.0" layoutY="161.0" mnemonicParsing="false" onAction="#nukeAllItems" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: orange;" text="Poista kaikki" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="15.0" layoutY="208.0" mnemonicParsing="false" onAction="#oletukset" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: orange;" text="Käytä oletusesineitä (nollaa esinelistan)" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

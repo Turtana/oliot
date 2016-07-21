@@ -82,6 +82,7 @@ public class XmlReader {
     
     
     public SmartPostList parsePostData(String data, SmartPostList g) throws SQLException, ClassNotFoundException {
+        int i;
         try {
             dbf = DocumentBuilderFactory.newInstance();
             db = dbf.newDocumentBuilder();
@@ -97,7 +98,7 @@ public class XmlReader {
             NodeList lng = doc.getElementsByTagName("lng");
             
             
-            for (int i = 0; i < code.getLength(); i++) { // Laittaa SmartPostListiin
+            for (i = 0; i < code.getLength(); i++) { // Laittaa SmartPostListiin
                 g.addPost(new SmartPost(i, 
                         code.item(i).getTextContent(), city.item(i).getTextContent(),
                         address.item(i).getTextContent(), availability.item(i).getTextContent(),
@@ -105,9 +106,9 @@ public class XmlReader {
                         Double.parseDouble(lng.item(i).getTextContent())));
             }
             
-            /* g.addPost(new SmartPost(500, "00001", "PRETORIA", // Pitempien matkojen testailuun
-                        "1 Jean Ave", "dunno",
-                        "Yhtiön pääkonttori, Etelä-Afrikka", 36.181872, 28.209372)); */
+            /* g.addPost(new SmartPost(i+1, "00001", "HONGKONG", // Pitempien matkojen testailuun (ei toimi)
+                        "Bagua 1st Rd", "dunno",
+                        "Yhtiön pääkonttori, Kiina", 22.557296, 114.103715)); */
             
             return g;
             

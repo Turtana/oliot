@@ -68,7 +68,7 @@ public class FXMLUusiEsineController implements Initializable {
             try {
                 varus.setError("Et antanut kaikkia tietoja uutta esinettä varten! Nimi ja koko ovat välttämättömiä.");
                 virhe = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("FXMLVirhe.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/smartposter/FXMLVirhe.fxml"));
                 Scene scene = new Scene(root);
                 virhe.setTitle("Liian vähän parametreja");
                 virhe.setScene(scene);
@@ -82,7 +82,7 @@ public class FXMLUusiEsineController implements Initializable {
             iddi = ItemList.getFreeId();
             asd = new Item(iddi, kuvausArea.getText(), Integer.parseInt(kokoField.getText()), sarkyva, nimiField.getText());
             ItemList.addItem(asd);
-            peruuta(); // Ja suljetaan ikkuna
+            peruuta(); // Ja suljetaan ikkuna, ei siis peruuteta
         }
     }
 }

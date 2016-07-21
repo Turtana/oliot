@@ -12,6 +12,6 @@ package item;
  */
 public class Jalkapallo extends Item {
     public Jalkapallo () {
-        super(3, "Aseta maahan, potkaise ja juokse karkuun ennen kuin ikkunan maksajaa aletaan etsiskellä.\n\nKoko: 1\nKestävä", 1, false, "Jalkapallo");
+        super(3, "Aseta maahan, potkaise ja juokse karkuun ennen kuin ikkunan maksajaa aletaan etsiskellä.", 1, false, "Jalkapallo");
     }
 }

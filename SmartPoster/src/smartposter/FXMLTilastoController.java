@@ -73,32 +73,23 @@ public class FXMLTilastoController implements Initializable {
         Historydump h;
         try {
             con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
-            PreparedStatement ehaku, thaku;
+            PreparedStatement haku;
             
-            ehaku = con.prepareStatement("SELECT history.eventtime, address.city " // Pitää vetää kaksi hakua, ettei mene sekaisin smartpost-kaupungit.
-                    + "FROM (history INNER JOIN smartpost ON history.startid = smartpost.smartid) "
-                    + "INNER JOIN address ON smartpost.smartid = address.addressid;");
-            rs = ehaku.executeQuery(); // Eka puolikas
-            
-            thaku = con.prepareStatement("SELECT address.city, item.name, package.codename, history.distance "
-                    + "FROM (((history INNER JOIN smartpost ON history.destid = smartpost.smartid) "
-                    + "INNER JOIN address ON smartpost.smartid = address.addressid) "
-                    + "INNER JOIN item ON history.itemid = item.itemid) "
-                    + "INNER JOIN package ON history.packageid = package.packageid;");
-            rt = thaku.executeQuery(); // Toka puolikas
+            haku = con.prepareStatement("SELECT eventtime, startcity, destcity, itemname, packagename, distance "
+                    + "FROM history;");
+            rs = haku.executeQuery();
             
             while (rs.next()) {
-                rt.next();
                 h = new Historydump();
                 h.a.set(rs.getString("eventtime"));
-                h.b.set(rs.getString("city"));
-                h.c.set(rt.getString("city"));
-                h.d.set(rt.getString("name"));
-                h.e.set(rt.getString("codename"));
-                h.f.set(rt.getDouble("distance"));
+                h.b.set(rs.getString("startcity"));
+                h.c.set(rs.getString("destcity"));
+                h.d.set(rs.getString("itemname"));
+                h.e.set(rs.getString("packagename"));
+                h.f.set(rs.getDouble("distance"));
                 
-                System.out.println(rs.getString("city"));
-                System.out.println(rt.getString("city"));
+                System.out.println(rs.getString("startcity"));
+                System.out.println(rs.getString("destcity"));
                 data.add(h);
                 System.out.println(rs.getString("eventtime"));
             }
@@ -124,6 +115,8 @@ public class FXMLTilastoController implements Initializable {
         try {
             con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
             PreparedStatement pois = con.prepareStatement("DELETE FROM history;"); // BOOOOOM
+            pois.executeUpdate();
+            pois = con.prepareStatement("DELETE FROM event;");
             pois.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ItemList.class.getName()).log(Level.SEVERE, null, ex);

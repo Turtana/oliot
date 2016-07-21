@@ -91,16 +91,15 @@ public class ItemList {
             PreparedStatement free;
             ResultSet rs;
             
-            while (true) {
-                free = con.prepareStatement("SELECT itemid FROM item WHERE itemid = ?;");
-                free.setInt(1, i);
-                rs = free.executeQuery();
-                if (rs.next()) { // Tuli joku tulos eli i on varattu
-                    i++;
-                } else {
-                    break; // i on hyvä
-                }
+            free = con.prepareStatement("SELECT itemid FROM item;");
+            
+            rs = free.executeQuery();
+            
+            while (rs.next()) {
+                i = rs.getInt("itemid");
             }
+            i++;
+            
             System.out.println("Varataan id " + i);
         } catch (/*ClassNotFoundException | */SQLException ex) {
             Logger.getLogger(ItemList.class.getName()).log(Level.SEVERE, null, ex);
@@ -144,6 +143,8 @@ public class ItemList {
     }
     
     public static void addItem (Item s) { // Lisää tietokantaan Itemin s
+        String[] kuvauscrop;
+        kuvauscrop = s.kuvaile().split("\n"); // Rujo ratkaisu. Menköön.
         urli = "jdbc:sqlite:timotei.db";
         try {
             con = DriverManager.getConnection(urli);
@@ -158,13 +159,12 @@ public class ItemList {
             PreparedStatement viuh = con.prepareStatement("INSERT INTO "
                     + "item(itemid,name,size,breakable,description) "
                     + "VALUES (?, ?, ?, ?, ?);");
-            // id, p-numero, kaupunki, osoite, aukiolo, toimisto, lat, lon
 
             viuh.setInt(1, s.getId()); // Pääavain
             viuh.setString(2, s.toString());
             viuh.setInt(3, s.getKoko());
             viuh.setBoolean(4, s.isBreakable());
-            viuh.setString(5, s.kuvaile());
+            viuh.setString(5, kuvauscrop[0]);
             viuh.executeUpdate();
             
             System.out.println(s.toString() + " OK");

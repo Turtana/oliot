@@ -44,11 +44,15 @@ public class Pakkaus {
         }
     }
     
+    public String nimitys () {
+        return nimi;
+    }
+    
     public String kuvaile () {
         String turva = "Ei";
         try {
             con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
-            PreparedStatement kaik = con.prepareStatement("SELECT desc, speed, size, safe FROM package WHERE packageid = ?;");
+            PreparedStatement kaik = con.prepareStatement("SELECT desc, speed, size, safe, maxdistance FROM package WHERE packageid = ?;");
             kaik.setInt(1, packageid);
             ResultSet rs = kaik.executeQuery();
             if (rs.getBoolean("safe")) {
@@ -57,7 +61,7 @@ public class Pakkaus {
             
             kuvaus = rs.getString("desc") + "\n\nKoko: " + rs.getInt("size") 
                     + "\nNopeusluokka: " + rs.getInt("speed") + "\nTurvallinen: " 
-                    + turva;
+                    + turva + "\nMaksimimatka: " + rs.getString("maxdistance") + " km";
             
         } catch (SQLException ex) {
             System.out.println("sql vaan kaatui");

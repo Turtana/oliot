@@ -12,6 +12,6 @@ package item;
  */
 public class Patja extends Item {
     public Patja () {
-        super(4, "Herneitä patjan alta on turha hakea, mutta muuta elämää löytyy senkin edestä. Myrkky maksaa erikseen.\n\nKoko: 3\nKestävä", 3, false, "Joustinpatja");
+        super(4, "Herneitä patjan alta on turha hakea, mutta muuta elämää löytyy senkin edestä. Myrkky maksaa erikseen.", 3, false, "Joustinpatja");
     }
 }
