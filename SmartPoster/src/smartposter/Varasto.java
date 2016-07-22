@@ -141,6 +141,24 @@ public class Varasto {
         System.out.println(p + " poistettu");
     }
     
+    public void delAll () {
+        try {
+            con = DriverManager.getConnection("jdbc:sqlite:timotei.db");
+            PreparedStatement vex = con.prepareStatement("DELETE FROM warehouse;");
+            vex.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Varasto.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Varasto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
     
     // Virheilmoitukset alla
     

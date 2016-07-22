@@ -65,9 +65,7 @@ public class FXMLStartController implements Initializable {
     private void startAnew(ActionEvent event) {
         ItemList.nukeFlash(); // Tervemenoa tavaratyypit
         Varasto v = Varasto.getInstance();
-        for (Pakkaus q : v.getList()) {
-            v.delThing(q); // Varasto viskattu veks
-        }
+        v.delAll(); // Varasto viskattu veks
         SmartPostList.getInstance().nukeFlash(); // Sayonara SmartPostit
         vaillaMenneisyytta(); // Historia hävitetty
         
