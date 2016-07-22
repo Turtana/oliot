@@ -59,7 +59,7 @@ public class Varasto {
                 }
             }
             
-            System.out.println(laskuri);
+            System.out.println("Pakkauksen id: " + laskuri);
             PreparedStatement lisaa = con.prepareStatement("INSERT INTO warehouse(wareid, itemid, packageid) VALUES (?, ?, ?)");
             lisaa.setInt(1, laskuri);
             lisaa.setInt(2, p.avaa().getId());

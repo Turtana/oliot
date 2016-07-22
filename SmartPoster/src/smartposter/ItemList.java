@@ -220,7 +220,7 @@ public class ItemList {
                 Logger.getLogger(ItemList.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("Duck and coveeeeee- BOOOOOOOOMMMM");
+        System.out.println("Esineet tuhottu");
     }
 }
 

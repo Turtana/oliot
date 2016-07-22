@@ -339,7 +339,7 @@ public class FXMLDocumentController implements Initializable {
             //comboVasta.getItems().add(a);
             sad++;
         }
-        System.out.println("Yhteensä " + sad + " SmartPostia");
+        //System.out.println("Yhteensä " + sad + " SmartPostia");
         //refreshPostsv();
         //refreshWares();
     }
@@ -382,6 +382,6 @@ public class FXMLDocumentController implements Initializable {
             comboVasta.getItems().add(a);
             sad++;
         }
-        System.out.println("Yhteensä " + sad + " Smartia");
+        //System.out.println("Yhteensä " + sad + " Smartia");
     }
 }

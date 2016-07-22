@@ -213,6 +213,6 @@ public class SmartPostList {
                 Logger.getLogger(SmartPostList.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("Duck and coveeeeeer!");
+        System.out.println("SmartPostit tuhottu!");
     }
 }
